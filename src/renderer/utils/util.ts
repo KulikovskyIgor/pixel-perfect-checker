@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 export function getImageSize(
   src: string
 ): Promise<{ width: number; height: number }> {

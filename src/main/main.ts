@@ -9,7 +9,7 @@
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
 import path from 'path';
-import { app, BrowserWindow, shell, ipcMain, dialog, screen } from 'electron';
+import { app, BrowserWindow, shell, ipcMain, dialog } from 'electron';
 // import { autoUpdater } from 'electron-updater';
 // import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -114,15 +114,15 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1024,
-    height: 728,
+    width: 700,
+    height: 500,
     frame: false,
     transparent: true,
     hasShadow: false,
     resizable: false,
     icon: getAssetPath('icon.png'),
     webPreferences: {
-      // devTools: false,
+      devTools: false,
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')
         : path.join(__dirname, '../../.erb/dll/preload.js'),
@@ -154,16 +154,6 @@ const createWindow = async () => {
     shell.openExternal(edata.url);
     return { action: 'deny' };
   });
-
-  console.log('******** pos -------', mainWindow.getPosition());
-
-  setTimeout(() => {
-    // SET POSITION AND SIZE
-    // mainWindow?.setBounds({ width: 100, height: 100 }, true);
-    // mainWindow?.setPosition(10, 10, true);
-    // SEATS APP ON TOP
-    // mainWindow?.setAlwaysOnTop(true);
-  }, 3000);
 
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line

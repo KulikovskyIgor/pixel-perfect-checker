@@ -5,12 +5,14 @@ import Controls from './components/Controls';
 import DragArea from './components/DragArea';
 
 export default function App() {
+  const [image, setImage] = useState<string | undefined>();
   const [opacity, setOpacity] = useState(100);
   const [zoom, setZoom] = useState(100 / window.devicePixelRatio);
   useKeyboardNavigation({
     zoom,
     onOpacityChange: setOpacity,
     onZoomyChange: setZoom,
+    onResetPress: setImage,
   });
 
   return (
@@ -21,7 +23,12 @@ export default function App() {
         onOpacityChange={setOpacity}
         onZoomChange={setZoom}
       />
-      <DragArea opacity={opacity} zoom={zoom} />
+      <DragArea
+        image={image}
+        opacity={opacity}
+        zoom={zoom}
+        setImage={setImage}
+      />
     </main>
   );
 }

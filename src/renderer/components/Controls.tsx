@@ -42,7 +42,7 @@ export default function Controls({
   }, []);
 
   return (
-    <header>
+    <header className="controls">
       <label>
         Always On Top
         <input

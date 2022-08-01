@@ -2,27 +2,73 @@
  * @NOTE: Prepend a `~` to css file paths that are in your node_modules
  *        See https://github.com/webpack-contrib/sass-loader#imports
  */
+ @font-face {
+  font-family: 'Pixel';
+  src: url('../../assets/fonts/ChessType.woff') format('woff'), /* Modern Browsers */
+       url('../../assets/fonts/ChessType.ttf')  format('truetype'), /* Safari, Android, iOS */
+
+}
+
 body {
   position: relative;
   color: white;
   height: 100vh;
-  /* background: linear-gradient(
-    200.96deg,
-    #fedc2a -29.09%,
-    #dd5789 51.77%,
-    #7a2c9e 129.35%
-  ); */
   background-color: transparent;
   font-family: sans-serif;
   overflow-y: hidden;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+}
 
-  border: 1px solid red;
+.controls {
+  height: 30px;
+  background-color: #353839;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.drag-area, .help {
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+  height: calc(100vh - 100px);
 }
 
 .drag-area {
-  -webkit-user-select: none;
-  -webkit-app-region: drag;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.help {
+  font-family: 'Pixel';
+  font-size: 2rem;
+  line-height: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.9);
+  border-left: 1px solid #353839;
+  border-right: 1px solid #353839;
+  border-bottom: 1px solid #353839;
+}
+
+.help button {
+  font-family: 'Pixel';
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.help section {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin-top: 50px;
+}
+
+.help section div {
+  display: flex;
+  justify-content: space-between;
 }

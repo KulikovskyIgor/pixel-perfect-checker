@@ -1,13 +1,20 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { floatToInt, getImageSize } from 'renderer/utils/util';
+import Help from './Help';
 
 type DragAreaProps = {
+  image?: string;
   opacity: number;
   zoom: number;
+  setImage: (image: string) => void;
 };
 
-export default function DragArea({ opacity, zoom }: DragAreaProps) {
-  const [image, setImage] = useState<string | null>(null);
+export default function DragArea({
+  image,
+  opacity,
+  zoom,
+  setImage,
+}: DragAreaProps) {
   const [imageSize, setImageSize] = useState<{ width: number; height: number }>(
     {
       width: 0,
@@ -52,15 +59,14 @@ export default function DragArea({ opacity, zoom }: DragAreaProps) {
   useEffect(() => {
     if (image) {
       getImageSize(image)
-        // eslint-disable-next-line promise/always-return
         .then((size) => {
           const scaledSize = {
             width: (size.width * zoom) / 100,
             height: (size.height * zoom) / 100,
           };
           const windowSize = {
-            width: floatToInt(scaledSize.width + 50),
-            height: floatToInt(scaledSize.height + 50),
+            width: floatToInt(scaledSize.width + 20),
+            height: floatToInt(scaledSize.height + 110),
           };
 
           setImageSize(scaledSize);
@@ -73,7 +79,6 @@ export default function DragArea({ opacity, zoom }: DragAreaProps) {
           console.error('Image size cannot be determined', e.message);
         });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [image, zoom]);
 
   if (image && imageSize.width) {
@@ -88,13 +93,5 @@ export default function DragArea({ opacity, zoom }: DragAreaProps) {
     );
   }
 
-  return (
-    <div className="drag-area">
-      <header>Drag & Drop to Upload File</header>
-      <span>OR</span>
-      <button type="button" onClick={onBrowseFileClick}>
-        Browse File
-      </button>
-    </div>
-  );
+  return <Help onBrowseFileClick={onBrowseFileClick} />;
 }

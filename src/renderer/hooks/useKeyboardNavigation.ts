@@ -3,12 +3,14 @@ import Mousetrap from 'mousetrap';
 const ZOOM_KEYS = ['-', '=', '+'];
 const OPACITY_KEYS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 const NAV_KEYS = ['up', 'down', 'left', 'right'];
-const ALL_KEYS = [...ZOOM_KEYS, ...OPACITY_KEYS, ...NAV_KEYS];
+const RESET_KEYS = ['command+r', 'r'];
+const ALL_KEYS = [...ZOOM_KEYS, ...OPACITY_KEYS, ...NAV_KEYS, ...RESET_KEYS];
 
 type KeyboardNavigationProps = {
   zoom: number;
   onOpacityChange: (opacity: number) => void;
   onZoomyChange: (zoom: number) => void;
+  onResetPress: (reset: undefined) => void;
 };
 
 export default function useKeyboardNavigation(
@@ -16,6 +18,7 @@ export default function useKeyboardNavigation(
     zoom,
     onOpacityChange,
     onZoomyChange,
+    onResetPress,
   }: KeyboardNavigationProps = {} as KeyboardNavigationProps
 ) {
   ALL_KEYS.forEach((key) => {
@@ -34,6 +37,9 @@ export default function useKeyboardNavigation(
         if (pressedKey === '-' && zoom > 1) {
           onZoomyChange(zoom - 1);
         }
+      }
+      if (RESET_KEYS.includes(pressedKey)) {
+        onResetPress(undefined);
       }
     });
   });
