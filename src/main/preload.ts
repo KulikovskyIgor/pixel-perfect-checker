@@ -6,7 +6,8 @@ export type Channels =
   | 'read-file-error'
   | 'set-on-top'
   | 'set-window-size'
-  | 'key-press';
+  | 'key-press'
+  | 'close';
 
 contextBridge.exposeInMainWorld('electron', {
   ipcRenderer: {

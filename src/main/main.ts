@@ -25,7 +25,7 @@ import { resolveHtmlPath, readFileSync } from './util';
 
 let mainWindow: BrowserWindow | null = null;
 
-ipcMain.on('open-file', async (event) => {
+ipcMain.on('open-file', (event) => {
   mainWindow?.hide();
   dialog
     .showOpenDialog({ properties: ['openFile'] })
@@ -41,15 +41,15 @@ ipcMain.on('open-file', async (event) => {
     });
 });
 
-ipcMain.on('set-on-top', async (_, isOnTop) => {
+ipcMain.on('set-on-top', (_, isOnTop) => {
   mainWindow?.setAlwaysOnTop(isOnTop);
 });
 
-ipcMain.on('set-window-size', async (_, size) => {
+ipcMain.on('set-window-size', (_, size) => {
   mainWindow?.setBounds(size, true);
 });
 
-ipcMain.on('key-press', async (_, key) => {
+ipcMain.on('key-press', (_, key) => {
   const [x, y] = mainWindow?.getPosition() || [0, 0];
 
   switch (key) {
@@ -67,6 +67,10 @@ ipcMain.on('key-press', async (_, key) => {
       break;
     default:
   }
+});
+
+ipcMain.on('close', () => {
+  app.quit();
 });
 
 if (process.env.NODE_ENV === 'production') {
@@ -114,8 +118,8 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 700,
-    height: 500,
+    width: 600,
+    height: 600,
     frame: false,
     transparent: true,
     hasShadow: false,
@@ -165,11 +169,7 @@ const createWindow = async () => {
  */
 
 app.on('window-all-closed', () => {
-  // Respect the OSX convention of having the application in memory even
-  // after all windows have been closed
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  app.quit();
 });
 
 app

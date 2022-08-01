@@ -34,6 +34,9 @@ export default function Controls({
     },
     [onZoomChange]
   );
+  const handleClose = useCallback(() => {
+    window.electron.ipcRenderer.sendMessage('close');
+  }, []);
 
   useEffect(() => {
     if (isAlwaysOnTop) {
@@ -43,37 +46,46 @@ export default function Controls({
 
   return (
     <header className="controls">
-      <label>
-        Always On Top
-        <input
-          name="isGoing"
-          type="checkbox"
-          checked={isAlwaysOnTop}
-          onChange={handleOnTopChange}
-        />
-      </label>
-      <label>
-        Opacity
-        <input
-          type="range"
-          min={0}
-          max={100}
-          value={opacity}
-          step={1}
-          onChange={handleOpacityChange}
-        />
-      </label>
-      <label>
-        Zoom
-        <input
-          type="number"
-          min={1}
-          max={100}
-          value={zoom}
-          step={1}
-          onChange={handleZoomChange}
-        />
-      </label>
+      <section>
+        <label>
+          always on top
+          <input
+            name="isGoing"
+            type="checkbox"
+            checked={isAlwaysOnTop}
+            onChange={handleOnTopChange}
+          />
+        </label>
+        <span className="divider">|</span>
+        <label>
+          opacity
+          <input
+            type="range"
+            min={0}
+            max={100}
+            value={opacity}
+            step={1}
+            onChange={handleOpacityChange}
+          />
+        </label>
+        <span className="divider">|</span>
+        <label>
+          zoom
+          <input
+            type="number"
+            min={1}
+            max={100}
+            value={zoom}
+            step={1}
+            onChange={handleZoomChange}
+          />
+        </label>
+      </section>
+      <section>
+        <button type="button" className="close" onClick={handleClose}>
+          x
+        </button>
+      </section>
     </header>
   );
 }

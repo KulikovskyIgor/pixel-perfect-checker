@@ -9,6 +9,7 @@ module.exports = {
     'react/require-default-props': 'off',
     'promise/always-return': 'off',
     'react-hooks/exhaustive-deps': 'warn',
+    'jsx-a11y/label-has-associated-control': 'warn',
   },
   parserOptions: {
     ecmaVersion: 2020,

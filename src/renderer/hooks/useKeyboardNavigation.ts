@@ -40,6 +40,10 @@ export default function useKeyboardNavigation(
       }
       if (RESET_KEYS.includes(pressedKey)) {
         onResetPress(undefined);
+        window.electron.ipcRenderer.sendMessage('set-window-size', {
+          width: 600,
+          height: 600,
+        });
       }
     });
   });
