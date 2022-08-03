@@ -25,11 +25,11 @@ export function getScaledImageSize(zoom: number, imageSize: Size): Size {
 export function getWindowSize(imageSize: Size): Size {
   const width =
     imageSize.width < APP_WINDOW_WIDTH
-      ? APP_WINDOW_WIDTH + 20
-      : imageSize.width;
+      ? APP_WINDOW_WIDTH
+      : floatToInt(imageSize.width + 20);
 
   return {
-    width: floatToInt(width + 20),
+    width,
     height: floatToInt(imageSize.height + 110),
   };
 }

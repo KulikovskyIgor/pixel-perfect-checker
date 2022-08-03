@@ -12,13 +12,20 @@
 body {
   position: relative;
   height: 100vh;
-  min-width: 600px;
   background-color: transparent;
   font-family: 'Pixel';
   overflow-y: hidden;
   display: flex;
   flex-direction: column;
   color: white;
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+  overflow-x: hidden;
+}
+
+input {
+  -webkit-user-select: none;
+  -webkit-app-region: none;
 }
 
 .controls {
@@ -69,8 +76,6 @@ body {
 }
 
 .drag-area, .help {
-  -webkit-user-select: none;
-  -webkit-app-region: drag;
   height: calc(100vh - 100px);
 }
 
