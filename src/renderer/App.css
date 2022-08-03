@@ -23,7 +23,7 @@ body {
   overflow-x: hidden;
 }
 
-input {
+input, label, button, .help {
   -webkit-user-select: none;
   -webkit-app-region: none;
 }
