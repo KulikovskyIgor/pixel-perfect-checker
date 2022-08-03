@@ -1,5 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { floatToInt, getImageSize } from 'renderer/utils/util';
+import {
+  getImageSize,
+  getScaledImageSize,
+  getWindowSize,
+} from 'renderer/utils/util';
 import Help from './Help';
 
 type DragAreaProps = {
@@ -60,14 +64,8 @@ export default function DragArea({
     if (image) {
       getImageSize(image)
         .then((size) => {
-          const scaledSize = {
-            width: (size.width * zoom) / 100,
-            height: (size.height * zoom) / 100,
-          };
-          const windowSize = {
-            width: floatToInt(scaledSize.width + 20),
-            height: floatToInt(scaledSize.height + 110),
-          };
+          const scaledSize = getScaledImageSize(zoom, size);
+          const windowSize = getWindowSize(scaledSize);
 
           setImageSize(scaledSize);
           window.electron.ipcRenderer.sendMessage(

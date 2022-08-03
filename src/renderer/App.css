@@ -11,13 +11,14 @@
 
 body {
   position: relative;
-  color: white;
   height: 100vh;
+  min-width: 600px;
   background-color: transparent;
-  font-family: sans-serif;
+  font-family: 'Pixel';
   overflow-y: hidden;
   display: flex;
   flex-direction: column;
+  color: white;
 }
 
 .controls {

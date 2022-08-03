@@ -1,4 +1,5 @@
 import Mousetrap from 'mousetrap';
+import { APP_WINDOW_HEIGHT, APP_WINDOW_WIDTH } from 'renderer/constants/common';
 
 const ZOOM_KEYS = ['-', '=', '+'];
 const OPACITY_KEYS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
@@ -41,8 +42,8 @@ export default function useKeyboardNavigation(
       if (RESET_KEYS.includes(pressedKey)) {
         onResetPress(undefined);
         window.electron.ipcRenderer.sendMessage('set-window-size', {
-          width: 600,
-          height: 600,
+          width: APP_WINDOW_WIDTH,
+          height: APP_WINDOW_HEIGHT,
         });
       }
     });
