@@ -177,7 +177,7 @@
     "webpack-merge": "^5.8.0"
   },
   "build": {
-    "productName": "Pixel Perfect Checher",
+    "productName": "Pixel Perfect Checker",
     "appId": "org.erb.ElectronReact",
     "asar": true,
     "asarUnpack": "**\\*.{node,dll}",
