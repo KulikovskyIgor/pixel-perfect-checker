@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import useKeyboardNavigation from './hooks/useKeyboardNavigation';
 import Controls from './components/Controls';
