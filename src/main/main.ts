@@ -13,7 +13,7 @@ import { app, BrowserWindow, shell, ipcMain, dialog } from 'electron';
 // import { autoUpdater } from 'electron-updater';
 // import log from 'electron-log';
 import MenuBuilder from './menu';
-import { resolveHtmlPath, readFileSync } from './util';
+import { resolveHtmlPath, readFileSync, getMoveDistance } from './util';
 
 // class AppUpdater {
 //   constructor() {
@@ -51,19 +51,20 @@ ipcMain.on('set-window-size', (_, size) => {
 
 ipcMain.on('key-press', (_, key) => {
   const [x, y] = mainWindow?.getPosition() || [0, 0];
+  const moveDistance = getMoveDistance();
 
   switch (key) {
     case 'up':
-      mainWindow?.setPosition(x, y - 1);
+      mainWindow?.setPosition(x, y - moveDistance);
       break;
     case 'down':
-      mainWindow?.setPosition(x, y + 1);
+      mainWindow?.setPosition(x, y + moveDistance);
       break;
     case 'left':
-      mainWindow?.setPosition(x - 1, y);
+      mainWindow?.setPosition(x - moveDistance, y);
       break;
     case 'right':
-      mainWindow?.setPosition(x + 1, y);
+      mainWindow?.setPosition(x + moveDistance, y);
       break;
     default:
   }
