@@ -28,11 +28,13 @@ jobs:
         run: |
           npm install
 
-      - name: Publish releases
+      - name: Package apps
         env:
-          # This is used for uploading release assets to github
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm run postinstall
           npm run build
           npm run package
+
+      - name: View content 1
+        run: ls -R
