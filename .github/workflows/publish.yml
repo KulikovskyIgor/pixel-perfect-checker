@@ -3,10 +3,11 @@ name: Publish
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   publish:
+
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -39,4 +40,4 @@ jobs:
         run: |
           npm run postinstall
           npm run build
-          npm exec electron-builder -- --publish always --win
+          npm exec electron-builder -- --publish always --mac
