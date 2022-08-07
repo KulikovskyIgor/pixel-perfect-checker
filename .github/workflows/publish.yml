@@ -36,5 +36,21 @@ jobs:
           npm run build
           npm run package
 
-      - name: View content 1
-        run: ls -R
+      - name: Create GitHub release
+        id: create-new-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
+
+      - name: Upload release asset [mac/arm]
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-new-release.outputs.upload_url }}
+          asset_path: ./release/build/Pixel Perfect Checker-4.6.0-arm64.dmg
+          asset_name: PixelPerfectChecker-arm64.dmg
+          asset_content_type: application/zip
